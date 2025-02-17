@@ -861,7 +861,7 @@ h6.Summarryh6 {
 
 
 .homeBackground {
-    background-image: url('mainBg.png');
+    background-image: url('/mainBg.png');
     background-position: top;
     background-repeat: no-repeat;
     background-size: contain;
