@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Route, Routes } from 'react-router'
 import './App.css'
+import './Appresponsive.css'
 import Home from './components/Home/Home'
 import Innerpage from './components/InnerPage/Innerpage'
 import Navbar from './components/navbar/Navbar'

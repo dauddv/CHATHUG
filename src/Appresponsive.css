@@ -1,0 +1,446 @@
+@media only screen and (max-width: 1400px){
+    .sideBarInner {
+        width: 24%;
+    }
+}
+
+@media only screen and (max-width: 1199px){
+    .sideBarInner {
+        width: 26%;
+    }
+}
+
+@media only screen and (max-width: 991px){
+    .Navbar {
+        padding: 10px 17px 5px 30px;
+    }
+
+    .footerMenu ul {
+        gap: 20px;
+    }
+
+    footer.footer {
+        padding: 44px 43px 20px 50px;
+        margin-top: 50px;
+    }
+    .sideBarInner {
+        width: 34%;
+    }
+
+    .inenerPageheading {
+        padding: 125px 0 0;
+    }
+
+    .HomeCardMAin {
+        margin: 0 2%;
+    }
+
+    .PBHeaderrow2Bedroominfo {
+        padding-top: 40px;
+    }
+    
+    .PBHeaderrow2Text {
+        padding-top: 40px;
+    }
+
+    .PropertyBrainHeaderrow2 {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .PropertyBrainHeader {
+        padding: 0 0 208px;
+        margin-bottom: 8%;
+    }
+    
+    .PropertyBrainSectionInnerImg img {
+        width: 75%;
+        margin: 0 auto;
+    }
+    
+    .PropertyBrainSectionInner {
+        min-height: 175px;
+    }
+    
+    .PropertyBrain h1 {
+        font-size: 16px;
+    }
+    
+    .PropertyBrainSection .row .col-12 {
+        padding-bottom: 25px;
+    }
+
+    .PropertyBrainSectionInner {
+        margin: 0;
+    }
+
+    .todoCardMain .col-sm-12 {
+        flex: 0 0 auto;
+        width: 33.333333%;
+    }
+    
+    .information {
+        margin: 15px 20px 40px;
+    }
+    
+    .urgentMain svg {
+        margin: 35px 0 9px;
+    }
+    
+    .accordion-body {
+        padding: 58px 10% 40px;
+    }
+}
+
+@media only screen and (max-width: 767px){
+    .HomeCardMAin .row::before {
+        display: none;
+    }
+    
+    .HomeCardMAin .HVAClogoText {
+        justify-content: center;
+    }
+    
+    .HVACText {
+        text-align: center;
+    }
+    
+    .HVAClogo {
+        display: none;
+    }
+    
+    .cardMAin {
+        margin: 30px auto 1px;
+    }
+    
+    .cardPagination {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    
+    .cardPaginationtext h4 {
+        padding: 0;
+    }
+    
+    .utilitiesClass {
+        padding: 6px 20px 25px 10px;
+        margin-top: 15px;
+    }
+
+    .hameCardCall {
+        padding-top: 6%;
+    }
+
+    .footerText {
+        padding: 15px 0 0 35px;
+    }
+    
+    footer.footer {
+        padding: 40px 20px 20px 30px;
+    }
+    
+    .footerMenu ul {
+        gap: 15px;
+    }
+    
+    .footerLogos {
+        gap: 15px;
+    }
+
+    .footerText {
+        padding: 15px 0 0 35px;
+    }
+    
+    .homeBackground {
+        background-size: cover;
+        border-bottom-right-radius: 25px;
+        border-bottom-left-radius: 25px;
+    }
+
+    .InnerPageInner {
+        width: 520px;
+    }
+
+    .sideBarInner {
+        width: 46%;
+    }
+    .first h1 {
+        font-size: 21px;
+    }
+
+    .hameCardCall {
+        padding-bottom: 3%;
+    }
+    .PropertyBrainHeader {
+        padding: 0 0 230px;
+    }
+    
+    .PBHeaderrow2Bedroominfo {
+        gap: 20px;
+    }
+    
+    .PropertyBrainSection .col-12 {
+        flex: 0 0 auto;
+        width: 50%;
+    }
+
+    .PropertyBrain h5 {
+        font-size: 14px;
+    }
+
+    .PBHeaderrow1Inner {
+        margin: 0 15px 0;
+    }
+
+    .accordion-body {
+        padding: 18px 10% 35px;
+    }
+    
+    h6.Summarryh6 {
+        padding: 20px 10% 20px;
+    }
+    
+    .todoCardMain .col-sm-12 {
+        width: 50%;
+    }
+    
+    .todoPage h2 {
+        font-size: 21px;
+        line-height: 32px;
+    }
+    
+    .fenceMAin .todos1 h6 {
+        font-size: 18px;
+    }
+    
+    .todosTop {
+        padding: 0px 0 5px;
+    }
+    
+    .UrgRecMenMAin {
+        padding-bottom: 20px;
+    }
+    
+    .urgentMain svg {
+        margin: 20px 0 5px;
+    }
+    
+    .information {
+        padding: 25px 15px 25px 15px;
+    }
+}
+
+@media only screen and (max-width: 576px){
+    .InnerPageInner {
+        width: 100%;
+    }
+    
+    .Navbar {flex-direction: column;width: 100%;align-items: normal;}
+    
+    .navbarLogo {
+        justify-content: space-between;
+    }
+    
+    footer.footer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 25px;
+    }
+    
+    .footerText {
+        padding: 15px 0 0 0px;
+    }
+    
+    .footerTop {
+        flex-direction: column-reverse;
+        align-items: center;
+        gap: 20px;
+        padding-bottom: 0px;
+    }
+    
+    .footerMenu ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+    .NavbarAlert {
+        width: 90%;
+    }    
+
+    .row.utilitiesRow {
+        width: 95%;
+        margin: auto;
+    }
+
+    .innerPageSearch {
+        width: 95%;
+        margin: auto;
+    }
+
+    .navbarMiddle {
+        margin: 2% auto 4%;
+        display: none;
+    }
+    
+    .NavbarSignUp {
+        margin: 4% 0 3% auto;
+    }
+
+    .navbarMiddle {
+        margin: 2% auto 4%;
+        display: none;
+    }
+    
+    .NavbarSignUp {
+        margin: 4% 0 3% auto;
+    }
+    
+    .inenerPageheading {
+        padding: 180px 0 0;
+    }
+
+    .footerBottom p {
+        text-align: center;
+    }
+
+    .HomeCardMAin {
+        padding: 11px 5px 20px 5px;
+    }
+
+    .footerlogo img {
+        width: 76%;
+    }
+    
+    .footerlogo {
+        text-align: center;
+    }
+
+    .sideBarInner {
+        padding-top: 155px;
+        width: 54%;
+    }
+    
+    .sidebarInnerBottom {
+        padding-left: 15px;
+        padding-top: 20px;
+    }
+    
+    .sidebarInnerBottomlogoandtext {
+        padding-bottom: 20px;
+    }
+    
+    .copyRight p {
+        padding: 5px 0 5px 12px;
+    }
+    
+    .first h2 {
+        font-size: 16px;
+        line-height: 35.6px;
+        font-weight: 500;
+    }
+
+    .PropertyBrainHeaderrow1 {
+        padding: 195px 0 70px;
+    }
+
+    .PropertyBrain {
+        padding: 0 15px 0 14px;
+    }
+
+    .PBHeaderrow2Bedroominfo {
+        flex-wrap: wrap;
+        gap: 0;
+        padding-top: 20px;
+        width: 100%;
+    }
+    
+    .PBHeaderrow2BRnfologonumAndText {
+        flex: 0 0 auto;
+        width: 50%;
+        padding: 10px 0;
+    }
+    
+    .PropertyBrainHeader {
+        padding: 0 0 315px;
+    }
+    
+    .PBHeaderrow2Img img {
+        width: 110px;
+        height: 110px;
+    }
+
+    .accordion-body {
+        padding: 0px 5% 25px;
+    }
+    
+    .todoNavabar ul {
+        padding: 8% 0 0;
+    }
+    
+    .todoPage h5 {
+        font-size: 16px;
+        font-weight: 600;
+    }
+    
+    .UrgRecMenMAin {
+        gap: 15px;
+    }
+    
+    .todoCardMain .col-sm-12 {
+        width: 100%;
+        margin: 0 0;
+    }
+    
+    .todoCard {
+        margin: 3% 10%;
+    }
+    
+}
+
+@media only screen and (max-width: 480px){
+    .sideBarInner {
+        width: 62%;
+    }
+
+    .UrgRecMenMAin {
+        flex-direction: column;
+        align-items: center;
+        gap: 0px;
+    }
+    
+    .information {margin: 15px 20px 25px;}
+    
+}
+
+@media only screen and (max-width: 380px){
+    .paginatioBtn {
+        width: 25px;
+        height: 25px;
+    }
+
+    .sideBarInner {
+        width: 72%;
+    }
+
+    .PropertyBrainSection .col-12 {
+        width: 100%;
+    }
+
+    .PropertyBrainSection .col-12 {
+        width: 100%;
+    }
+    
+    .PropertyBrainHeaderrow2 {
+        padding: 0px 10px 15px 15px;
+    }
+    
+    .PBHeaderrow2ImgAndText {
+        gap: 15px;
+    }
+
+    .todoCard {
+        margin: 3% 1%;
+    }
+}

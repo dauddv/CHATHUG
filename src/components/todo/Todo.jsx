@@ -1,12 +1,76 @@
 import { BiSolidError } from "react-icons/bi";
 import { FaListCheck } from "react-icons/fa6";
-import { IoMdCheckmark, IoMdHome  } from "react-icons/io";
+import { IoMdCheckmark, IoMdHome } from "react-icons/io";
 import { HiOutlineXMark } from "react-icons/hi2";
 import { AiFillLike } from "react-icons/ai";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { IoClose } from "react-icons/io5";
 
 const Todo = () => {
+    const [urgentItems, setUrgentItems] = useState([]);
+    const [recommendationItems, setRecommendationItems] = useState([]);
+    const [maintenanceItems, setMaintenanceItems] = useState([]);
+    const [selectedItem, setSelectedItem] = useState(null);
+    const [showPopup, setShowPopup] = useState(false);
+
+    const fetchData = async (category, setData) => {
+        try {
+            const response = await axios.get(`http://3.90.33.177:8000/list_all_items?page=1&pageSize=50&category=${category}`);
+            console.log(`Fetched ${category} Data:`, response.data);
+            setData(Array.isArray(response.data) ? response.data : []);
+        } catch (error) {
+            console.error(`Error fetching ${category} items:`, error);
+        }
+    };
+
+    useEffect(() => {
+        fetchData("not%20related", setUrgentItems);
+        fetchData("recommendation", setRecommendationItems);
+        fetchData("maintenance", setMaintenanceItems);
+    }, []);
+
+    const togoCardOnclick = async (itemId) => {
+        try {
+            const response = await axios.get(`http://3.90.33.177:8000/items/${itemId}`);
+            setSelectedItem(response.data);
+            setShowPopup(true);
+        } catch (error) {
+            console.error("Error fetching item details:", error);
+        }
+    };
+
+    const todocloseOnclick = () => {
+        setShowPopup(false);
+        setSelectedItem(null);
+    };
+
     return (
         <div>
+
+          {showPopup && selectedItem && (
+    <div className="todoPopup">
+        <div className="todoPopupOverlay">
+            <button onClick={todocloseOnclick} className="close">
+                <IoClose />
+            </button>
+            <div className="popupContent">
+                <h2>Task Details</h2>
+              <p><strong>Summary:</strong> {selectedItem.summary}</p>
+                <p><strong>Category:</strong> {selectedItem.category}</p>
+                {selectedItem.images && selectedItem.images.length > 0 && (
+                    <img 
+                        src={`data:image/jpeg;base64,${selectedItem.images[0]}`} 
+                        alt="Task Image"
+                       style={{ width: "30%", height: "auto", display: "block", margin: "auto" }}
+
+                    />
+                )}
+            </div>
+        </div>
+    </div>
+)}
+
 
             <div className="todoPage">
                 <div className="todoNavabar">
@@ -49,162 +113,49 @@ const Todo = () => {
                         </div>
                     </div>
                 </div>
+               
+
                 <div className="todoCardMain">
-                    <div className="row">
-                        <div className="col-lg-3 col-md-3 col-sm-12">
-                            <div className="todoCard todoCardred">
-                                <div className="todoCardMainheaChec">
-                                    <p>Windows and Doors</p>
-                                    <input type="checkbox" />
-                                </div>
-                                <div className="exteriorBtn">
-                                    <h5>EXTERIOR</h5>
-                                </div>
-                                <div className="todoCardImg">
-                                    <img src="/todocardimg1.png" />
-                                </div>
-                                <div className="todoCardPara"><h6>Rear living room window exterior panel has a chip that needs replacing.</h6></div>
-                                <div className="todoCardBtn">
-                                    <button><h6>Request 3+ Quotes</h6></button>
-                                    <div className="todocardPriceline"><h5>Approx Cost: $700-$1,200</h5></div>
-                                </div>
-                            </div>
+    <div className="row">
+        {urgentItems.length === 0 ? (
+            <p>Loading or No Items Found...</p>
+        ) : (
+            urgentItems.map((item, index) => (
+                <div key={index} className="col-lg-3 col-md-3 col-sm-12">
+                    <div className="todoCard todoCardred">
+                        <div className="todoCardMainheaChec">
+                            
+                                                      <p>{item._id}</p>  
+
+                            <input type="checkbox" />
                         </div>
-                        <div className="col-lg-3 col-md-3 col-sm-12">
-                            <div className="todoCard todoCardred">
-                                <div className="todoCardMainheaChec">
-                                    <p>Windows and Doors</p>
-                                    <input type="checkbox" />
-                                </div>
-                                <div className="exteriorBtn">
-                                    <h5>EXTERIOR</h5>
-                                </div>
-                                <div className="todoCardImg">
-                                    <img src="/todocardimg2.png" />
-                                </div>
-                                <div className="todoCardPara"><h6>Cracked outer window pane in the rear living room needs replacing.</h6></div>
-                                <div className="todoCardBtn">
-                                    <button><h6>Request 3+ Quotes</h6></button>
-                                    <div className="todocardPriceline"><h5>Approx Cost: $700-$1,200</h5></div>
-                                </div>
-                            </div>
+                        <div className="exteriorBtn">
+                            <h5>EXTERIOR</h5> 
                         </div>
-                        <div className="col-lg-3 col-md-3 col-sm-12">
-                            <div className="todoCard todoCardred">
-                                <div className="todoCardMainheaChec">
-                                    <p>Windows and Doors</p>
-                                    <input type="checkbox" />
-                                </div>
-                                <div className="exteriorBtn">
-                                    <h5>EXTERIOR</h5>
-                                </div>
-                                <div className="todoCardImg">
-                                    <img src="/todocardimg3.png" />
-                                </div>
-                                <div className="todoCardPara"><h6>Front living room window has condensation issues and difficulty opening/closing that needs further evaluation and repair.</h6></div>
-                                <div className="todoCardBtn">
-                                    <button><h6>Request 3+ Quotes</h6></button>
-                                    <div className="todocardPriceline"><h5>Approx Cost: $700-$1,200</h5></div>
-                                </div>
-                            </div>
+                        <div className="todoCardImg">
+                            <img 
+    src={item.images && item.images.length > 0 ? `data:image/jpeg;base64,${item.images[0]}` : "/default-image.png"} 
+    alt={`Task ${item._id}`} 
+/>
+
                         </div>
-                        <div className="col-lg-3 col-md-3 col-sm-12">
-                            <div className="todoCard todoCardred">
-                                <div className="todoCardMainheaChec">
-                                    <p>Electrical</p>
-                                    <input type="checkbox" />
-                                </div>
-                                <div className="exteriorBtn">
-                                    <h5>EXTERIOR</h5>
-                                </div>
-                                <div className="todoCardImg">
-                                    <img src="/todocardimg4.png" />
-                                </div>
-                                <div className="todoCardPara"><h6>Loose rear patio outlet needs further evaluation and repair by an electrician.</h6></div>
-                                <div className="todoCardBtn">
-                                    <button><h6>Request 3+ Quotes</h6></button>
-                                    <div className="todocardPriceline"><h5>Approx Cost: $700-$1,200</h5></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-lg-3 col-md-3 col-sm-12">
-                            <div className="todoCard todoCardred">
-                                <div className="todoCardMainheaChec">
-                                    <p>Electrical</p>
-                                    <input type="checkbox" />
-                                </div>
-                                <div className="exteriorBtn">
-                                    <h5>EXTERIOR</h5>
-                                </div>
-                                <div className="todoCardImg">
-                                    <img src="/todocardimg5.png" />
-                                </div>
-                                <div className="todoCardPara"><h6>Non-working rear patio step lights need further checking on current functionality.</h6></div>
-                                <div className="todoCardBtn">
-                                    <button><h6>Request 3+ Quotes</h6></button>
-                                    <div className="todocardPriceline"><h5>Approx Cost: $700-$1,200</h5></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-lg-3 col-md-3 col-sm-12">
-                            <div className="todoCard todoCardred">
-                                <div className="todoCardMainheaChec">
-                                    <p>Plumbing</p>
-                                    <input type="checkbox" />
-                                </div>
-                                <div className="exteriorBtn">
-                                    <h5>EXTERIOR</h5>
-                                </div>
-                                <div className="todoCardImg">
-                                    <img src="/todocardimg6.png" />
-                                </div>
-                                <div className="todoCardPara"><h6>Missing outlet and fixture covers in downstairs closet need further evaluation and repair.</h6></div>
-                                <div className="todoCardBtn">
-                                    <button><h6>Request 3+ Quotes</h6></button>
-                                    <div className="todocardPriceline"><h5>Approx Cost: $700-$1,200</h5></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-lg-3 col-md-3 col-sm-12">
-                            <div className="todoCard todoCardred">
-                                <div className="todoCardMainheaChec">
-                                    <p>Plumbing</p>
-                                    <input type="checkbox" />
-                                </div>
-                                <div className="exteriorBtn">
-                                    <h5>EXTERIOR</h5>
-                                </div>
-                                <div className="todoCardImg">
-                                    <img src="/todocardimg7.png" />
-                                </div>
-                                <div className="todoCardPara"><h6>Loose toilets in downstairs and upstairs hall bathrooms need new wax rings and further evaluation by a plumber.</h6></div>
-                                <div className="todoCardBtn">
-                                    <button><h6>Request 3+ Quotes</h6></button>
-                                    <div className="todocardPriceline"><h5>Approx Cost: $700-$1,200</h5></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-lg-3 col-md-3 col-sm-12">
-                            <div className="todoCard todoCardred">
-                                <div className="todoCardMainheaChec">
-                                    <p>Pool/Spa</p>
-                                    <input type="checkbox" />
-                                </div>
-                                <div className="exteriorBtn">
-                                    <h5>EXTERIOR</h5>
-                                </div>
-                                <div className="todoCardImg">
-                                    <img src="/todocardimg8.png" />
-                                </div>
-                                <div className="todoCardPara"><h6>Section of spa tiles separated from grout needs sealant installed.</h6></div>
-                                <div className="todoCardBtn">
-                                    <button><h6>Request 3+ Quotes</h6></button>
-                                    <div className="todocardPriceline"><h5>Approx Cost: $700-$1,200</h5></div>
-                                </div>
-                            </div>
-                        </div>
+                       <div className="todoCardPara">
+    <h6>{item.summary.split(" ").slice(0, 30).join(" ")}{item.summary.split(" ").length > 30 ? "..." : ""}</h6>  
+</div>
+
+                       <div onClick={() => togoCardOnclick(item._id)} className="todoCardBtn">
+                                        <button className="todoCardBtn"><h6>Request 3+ Quotes</h6></button>
+                                    </div>
                     </div>
                 </div>
+            ))
+        )}
+    </div>
+</div>
+
+
+
+
 
                 <div className="information informationred">
                     <h2>Notes from your inspector</h2>
@@ -239,87 +190,45 @@ const Todo = () => {
                         </div>
                     </div>
                 </div>
-                <div className="todoCardMain">
-                    <div className="row">
-                        <div className="col-lg-3 col-md-3 col-sm-12">
-                            <div className="todoCard todoCardyellow">
-                                <div className="todoCardMainheaChec">
-                                    <p>Meter base not secure</p>
-                                    <input type="checkbox" />
-                                </div>
-                                <div className="exteriorBtn">
-                                    <h5>Pool & Spa</h5>
-                                </div>
-                                <div className="todoCardImg">
-                                    <img src="/todocardimg9.png" />
-                                </div>
-                                <div className="todoCardPara"><h6>At the time of inspection the metal fencing in the back was broken and had rust on it. Recommend ....</h6></div>
-                                <div className="todoCardBtn">
-                                    <button><h6>Request 3+ Quotes</h6></button>
-                                    <div className="todocardPriceline"><h5>Approx Cost: $700-$1,200</h5></div>
-                                </div>
-                            </div>
+               
+{/* Recommendation Section */}
+<div className="todoCardMain">
+    <div className="row">
+        {recommendationItems.length === 0 ? (
+            <p>Loading or No Items Found...</p>
+        ) : (
+            recommendationItems.map((item, index) => (
+                <div key={index} className="col-lg-3 col-md-3 col-sm-12">
+                    <div className="todoCard todoCardyellow">  {/* Change color to yellow */}
+                        <div className="todoCardMainheaChec">
+                            <p>{item._id}</p>  
+                            <input type="checkbox" />
                         </div>
-                        <div className="col-lg-3 col-md-3 col-sm-12">
-                            <div className="todoCard todoCardyellow">
-                                <div className="todoCardMainheaChec">
-                                    <p>Meter base not secure</p>
-                                    <input type="checkbox" />
-                                </div>
-                                <div className="exteriorBtn">
-                                    <h5>Pool & Spa</h5>
-                                </div>
-                                <div className="todoCardImg">
-                                    <img src="/todocardimg9.png" />
-                                </div>
-                                <div className="todoCardPara"><h6>At the time of inspection the metal fencing in the back was broken and had rust on it. Recommend ....</h6></div>
-                                <div className="todoCardBtn">
-                                    <button><h6>Request 3+ Quotes</h6></button>
-                                    <div className="todocardPriceline"><h5>Approx Cost: $700-$1,200</h5></div>
-                                </div>
-                            </div>
+                        <div className="exteriorBtn">
+                            <h5>EXTERIOR</h5> 
                         </div>
-                        <div className="col-lg-3 col-md-3 col-sm-12">
-                            <div className="todoCard todoCardyellow">
-                                <div className="todoCardMainheaChec">
-                                    <p>Meter base not secure</p>
-                                    <input type="checkbox" />
-                                </div>
-                                <div className="exteriorBtn">
-                                    <h5>Pool & Spa</h5>
-                                </div>
-                                <div className="todoCardImg">
-                                    <img src="/todocardimg9.png" />
-                                </div>
-                                <div className="todoCardPara"><h6>At the time of inspection the metal fencing in the back was broken and had rust on it. Recommend ....</h6></div>
-                                <div className="todoCardBtn">
-                                    <button><h6>Request 3+ Quotes</h6></button>
-                                    <div className="todocardPriceline"><h5>Approx Cost: $700-$1,200</h5></div>
-                                </div>
-                            </div>
+                        <div className="todoCardImg">
+                            <img 
+                                src={item.images && item.images.length > 0 ? `data:image/jpeg;base64,${item.images[0]}` : "/default-image.png"} 
+                                alt={`Task ${item._id}`} 
+                            />
                         </div>
-                        <div className="col-lg-3 col-md-3 col-sm-12">
-                            <div className="todoCard todoCardyellow">
-                                <div className="todoCardMainheaChec">
-                                    <p>Meter base not secure</p>
-                                    <input type="checkbox" />
-                                </div>
-                                <div className="exteriorBtn">
-                                    <h5>Pool & Spa</h5>
-                                </div>
-                                <div className="todoCardImg">
-                                    <img src="/todocardimg9.png" />
-                                </div>
-                                <div className="todoCardPara"><h6>At the time of inspection the metal fencing in the back was broken and had rust on it. Recommend ....</h6></div>
-                                <div className="todoCardBtn">
-                                    <button><h6>Request 3+ Quotes</h6></button>
-                                    <div className="todocardPriceline"><h5>Approx Cost: $700-$1,200</h5></div>
-                                </div>
-                            </div>
+                        <div className="todoCardPara">
+                                <h6>{item.summary.split(" ").slice(0, 30).join(" ")}{item.summary.split(" ").length > 30 ? "..." : ""}</h6>  
+  
                         </div>
-
+                       
+                       <div onClick={() => togoCardOnclick(item._id)} className="todoCardBtn">
+                                        <button className="todoCardBtn"><h6>Request 3+ Quotes</h6></button>
+                                    </div>
                     </div>
                 </div>
+            ))
+        )}
+    </div>
+</div>
+
+
 
                 <div className="information informationyellow">
                     <h2>Information from your inspector</h2>
@@ -356,87 +265,43 @@ const Todo = () => {
                         </div>
                     </div>
                 </div>
-                <div className="todoCardMain">
-                    <div className="row">
-                        <div className="col-lg-3 col-md-3 col-sm-12">
-                            <div className="todoCard todoCardgreen">
-                                <div className="todoCardMainheaChec">
-                                    <p>Meter base not secure</p>
-                                    <input type="checkbox" />
-                                </div>
-                                <div className="exteriorBtn">
-                                    <h5>Pool & Spa</h5>
-                                </div>
-                                <div className="todoCardImg">
-                                    <img src="/todocardimg9.png" />
-                                </div>
-                                <div className="todoCardPara"><h6>At the time of inspection the metal fencing in the back was broken and had rust on it. Recommend ....</h6></div>
-                                <div className="todoCardBtn">
-                                    <button><h6>Request 3+ Quotes</h6></button>
-                                    <div className="todocardPriceline"><h5>Approx Cost: $700-$1,200</h5></div>
-                                </div>
-                            </div>
+               
+               {/* Maintenance Section */}
+<div className="todoCardMain">
+    <div className="row">
+        {maintenanceItems.length === 0 ? (
+            <p>Loading or No Items Found...</p>
+        ) : (
+            maintenanceItems.map((item, index) => (
+                <div key={index} className="col-lg-3 col-md-3 col-sm-12">
+                    <div className="todoCard todoCardgreen">  {/* Change color to green */}
+                        <div className="todoCardMainheaChec">
+                            <p>{item._id}</p>  
+                            <input type="checkbox" />
                         </div>
-                        <div className="col-lg-3 col-md-3 col-sm-12">
-                            <div className="todoCard todoCardgreen">
-                                <div className="todoCardMainheaChec">
-                                    <p>Meter base not secure</p>
-                                    <input type="checkbox" />
-                                </div>
-                                <div className="exteriorBtn">
-                                    <h5>Pool & Spa</h5>
-                                </div>
-                                <div className="todoCardImg">
-                                    <img src="/todocardimg9.png" />
-                                </div>
-                                <div className="todoCardPara"><h6>At the time of inspection the metal fencing in the back was broken and had rust on it. Recommend ....</h6></div>
-                                <div className="todoCardBtn">
-                                    <button><h6>Request 3+ Quotes</h6></button>
-                                    <div className="todocardPriceline"><h5>Approx Cost: $700-$1,200</h5></div>
-                                </div>
-                            </div>
+                        <div className="exteriorBtn">
+                            <h5>EXTERIOR</h5> 
                         </div>
-                        <div className="col-lg-3 col-md-3 col-sm-12">
-                            <div className="todoCard todoCardgreen">
-                                <div className="todoCardMainheaChec">
-                                    <p>Meter base not secure</p>
-                                    <input type="checkbox" />
-                                </div>
-                                <div className="exteriorBtn">
-                                    <h5>Pool & Spa</h5>
-                                </div>
-                                <div className="todoCardImg">
-                                    <img src="/todocardimg9.png" />
-                                </div>
-                                <div className="todoCardPara"><h6>At the time of inspection the metal fencing in the back was broken and had rust on it. Recommend ....</h6></div>
-                                <div className="todoCardBtn">
-                                    <button><h6>Request 3+ Quotes</h6></button>
-                                    <div className="todocardPriceline"><h5>Approx Cost: $700-$1,200</h5></div>
-                                </div>
-                            </div>
+                        <div className="todoCardImg">
+                            <img 
+                                src={item.images && item.images.length > 0 ? `data:image/jpeg;base64,${item.images[0]}` : "/default-image.png"} 
+                                alt={`Task ${item._id}`} 
+                            />
                         </div>
-                        <div className="col-lg-3 col-md-3 col-sm-12">
-                            <div className="todoCard todoCardgreen">
-                                <div className="todoCardMainheaChec">
-                                    <p>Meter base not secure</p>
-                                    <input type="checkbox" />
-                                </div>
-                                <div className="exteriorBtn">
-                                    <h5>Pool & Spa</h5>
-                                </div>
-                                <div className="todoCardImg">
-                                    <img src="/todocardimg9.png" />
-                                </div>
-                                <div className="todoCardPara"><h6>At the time of inspection the metal fencing in the back was broken and had rust on it. Recommend ....</h6></div>
-                                <div className="todoCardBtn">
-                                    <button><h6>Request 3+ Quotes</h6></button>
-                                    <div className="todocardPriceline"><h5>Approx Cost: $700-$1,200</h5></div>
-                                </div>
-                            </div>
-                        </div>
+                        <div className="todoCardPara">
+                        <h6>{item.summary.split(" ").slice(0, 30).join(" ")}{item.summary.split(" ").length > 30 ? "..." : ""}</h6>  
 
+                        </div>
+                        
+                       <div onClick={() => togoCardOnclick(item._id)} className="todoCardBtn">
+                                        <button className="todoCardBtn"><h6>Request 3+ Quotes</h6></button>
+                                    </div>
                     </div>
                 </div>
+            ))
+        )}
+    </div>
+</div>
 
                 <div className="information informationgreen">
                     <h2>Information from your inspector</h2>

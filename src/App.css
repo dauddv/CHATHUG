@@ -182,7 +182,7 @@
     top: 0;
     padding-top: 70px;
     z-index: 10;
-    left: -30%;
+    left: -100%;
     transition: left .5s ease-in-out;
 }
 
@@ -192,22 +192,22 @@
 
 .sidebarInnerTop::-webkit-scrollbar-track
 {
-	-webkit-box-shadow: inset 0 0 6px #1C1C1C1A;
-	border-radius: 10px;
-	background-color: #F5F5F5;
+    -webkit-box-shadow: inset 0 0 6px #1C1C1C1A;
+    border-radius: 10px;
+    background-color: #F5F5F5;
 }
 
 .sidebarInnerTop::-webkit-scrollbar
 {
-	width: 5px;
-	background-color: #F5F5F5;
+    width: 5px;
+    background-color: #F5F5F5;
 }
 
 .sidebarInnerTop::-webkit-scrollbar-thumb
 {
-	border-radius: 10px;
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-	background-color: #000;
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #000;
 }
 
 .inenerPageheading {
@@ -469,12 +469,17 @@
 .todoCardred {
     background: #FFECEC;
     border: 1px solid #EA5455;
+    padding-bottom: 10px;
+    height: 92%;
+    align-items: center;
 }
-
 
 .todoCardyellow {
     background: #FFF3D2;
     border: 1px solid var(--yellow);
+ padding-bottom: 10px;
+    height: 92%;
+    align-items: center;
 }
 
 .todoCardyellow .exteriorBtn h5 {
@@ -691,6 +696,9 @@ h6.Summarryh6 {
 .todoCardgreen {
     background: #FBFFF6;
     border: 1px solid var(--green);
+ padding-bottom: 10px;
+    height: 92%;
+    align-items: center;
 }
 
 .todoCardgreen .exteriorBtn h5 {
@@ -731,7 +739,7 @@ h6.Summarryh6 {
   }
   
   .PropertyBrainHeaderrow1 {
-    padding: 30px 0 70px;
+    padding: 115px 0 70px;
     background: var(--black);
   }
   
@@ -1172,4 +1180,129 @@ footer.footer {
     line-height: 14px;
     color: var(--white);
     padding-top: 11px;
+}
+
+.innerPageSearchLogo {
+    justify-content: space-between;
+}
+
+.innerPageSearchLogoLeftSide {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.innerPageSearchLogoLeftSide label {
+    line-height: 0;
+}
+.innerPageSearchLogorightSide svg {
+    transform: rotateZ(90deg);
+}
+
+.innerPageSearchLogorightSide {
+    padding-right: 20px;
+}
+
+.userMsg {
+    text-align: right;
+    padding: 2% 30px;
+    background: #f3f3f3;
+    margin: 5% 0px 5px 0px;
+    border-radius: 11px;
+}
+.botMsg {
+    margin: 5% 0px 5px 0px;
+}
+
+
+.chatBox {
+    padding-bottom: 30px;
+}
+
+.botMsg p {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.todoCardImg img {
+    object-fit: scale-down;
+    object-position: center;
+}
+
+.todoNavabar ul {
+    justify-content: center;
+}
+
+
+.todoPopup {
+    position: fixed;
+    z-index: 42;
+}
+
+/*.todoPopup {
+    width: 100%;
+    height: 100%;
+    background: #0000009e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 30;
+    opacity: 0;
+    visibility: hidden;
+}*/
+
+.todoPopup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex; /* ✅ Ensure it appears */
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.todoPopup.hidden {
+    display: none; /* ✅ Ensure it's only hidden when class is added */
+}
+
+
+
+.todoPopupOverlay {
+    background: #fff;
+    width: 70vw;
+    height: auto;
+    position: relative;
+    padding: 3% 3% 2% 2%;
+    border-radius: 10px;
+}
+.todoPopupOverlay .close {
+    width: 40px;
+    height: 40px;
+    background: var(--green);
+    color: #fff;
+    border-radius: 20px;
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    border: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.todoPopup.popupShow {
+    opacity: 1;
+    visibility: visible;
+}
+
+.todoPopupOverlay .close svg {
+    font-size: 25px;
 }
