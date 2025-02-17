@@ -13,7 +13,7 @@ const Navbar = ( {hamburgOnClick} ) => {
                 <div onClick={hamburgOnClick} className="navbarHamburg">
                 <IoMenu />
                 </div>
-                <img src="Logo.png"/>
+                <img src="/Logo.png"/>
             </div>
             <div className="navbarMiddle">
                 <div className="navbarMiddleArrowText">
