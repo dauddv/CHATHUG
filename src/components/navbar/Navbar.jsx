@@ -33,7 +33,7 @@ const Navbar = ( {hamburgOnClick} ) => {
                 <div className="notifictaionNumber">4</div>
                 </div>
                 <div className="NavbarSignUpImg">
-                    <img src="signInlogo.png"/>
+                    <img src="/signInlogo.png"/>
                 </div>
                 <div className="NavbarSignUpLogo">
                 <FaAngleDown />
