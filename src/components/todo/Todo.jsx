@@ -16,7 +16,7 @@ const Todo = () => {
 
     const fetchData = async (category, setData) => {
         try {
-            const response = await axios.get(`http://3.90.33.177:8000/list_all_items?page=1&pageSize=50&category=${category}`);
+            const response = await axios.get(`http://3.93.164.246:8000/list_all_items?page=1&pageSize=50&category=${category}`);
             console.log(`Fetched ${category} Data:`, response.data);
             setData(Array.isArray(response.data) ? response.data : []);
         } catch (error) {
@@ -32,7 +32,7 @@ const Todo = () => {
 
     const togoCardOnclick = async (itemId) => {
         try {
-            const response = await axios.get(`http://3.90.33.177:8000/items/${itemId}`);
+            const response = await axios.get(`http://3.93.164.246:8000/items/${itemId}`);
             setSelectedItem(response.data);
             setShowPopup(true);
         } catch (error) {
