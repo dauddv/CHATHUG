@@ -5,7 +5,7 @@ import { RiArrowUpCircleFill } from "react-icons/ri";
 import { FaBrain } from "react-icons/fa";
 import axios from "axios";
 
-const API_UPLOAD_URL = "http://3.90.33.177:8000/upload-pdf/";
+const API_UPLOAD_URL = "http://3.93.164.246:8000/upload-pdf/";
 const API_FETCH_URL = "/todo";
 
 const Innerpage = () => {
